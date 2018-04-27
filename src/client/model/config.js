@@ -12,6 +12,7 @@ export default{
   // 这里提前处理返回的数据
   console.log(data,2);
   return data;
+  
 }],
 
   // 请求头信息
