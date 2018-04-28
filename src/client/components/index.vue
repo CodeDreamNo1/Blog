@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
     <input type="text" v-model="username">
     <input type="text" v-model="pass">
-    <button @click="sub"></button>
+    <button @click="sub">测试token</button>
   </div>
 </template>
 
@@ -24,9 +24,9 @@ export default {
   },
   methods:{
       sub(){
-        this.$axios.get(api.login(), {'username':this.username, 'pass': this.pass})
+        this.$axios.get(api.login(), {'username':this.username, 'password': this.pass})
         .then(function(res) {
-           console.log(res)
+           console.log(res);
         });
       }
   }

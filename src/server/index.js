@@ -1,20 +1,18 @@
-import express from 'express'
+import express from 'express'    ///此处可以用import此处已经过babel转换
 import path from 'path'
 import favicon from 'serve-favicon'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 import webpack from 'webpack'
-
 // 引入history模块
 import history from 'connect-history-api-fallback'
-
 // 正式环境时，下面两个模块不需要引入
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
-
 import config from '../../build/webpack.dev.conf' 
+import router from './router/router'
 const app = express()
-
+require('./config/mongo') //连接mongo
 // 引入history模式让浏览器进行前端路由页面跳转
 app.use(history())
 
@@ -35,10 +33,10 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(path.join(__dirname, 'views')))
-app.get('/', function (req, res) {
-  res.sendFile('./views/index.html')
-})
-
+// app.get('/', function (req, res) {
+//   res.sendFile('./views/index.html')
+// })
+app.use(router);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found')
@@ -58,5 +56,6 @@ const SERVER_PORT = 4000
 app.listen(SERVER_PORT, () => {
   console.info(`服务已经启动，监听端口${SERVER_PORT}`)
 })
+
 
 export default app

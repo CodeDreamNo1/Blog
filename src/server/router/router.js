@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = reqeire('../config/mongo');
+var BlogModel = require('../model/login')
 const jwt = require('jsonwebtoken');
 const tokenS = 'gys';
 const token = jwt.sign(
@@ -25,19 +25,29 @@ const token = jwt.sign(
 // })
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.json({'user':db.user.find()})
-    // res.sendFile('../views/index.html');
+    res.sendFile('../views/index.html');
 });
-router.get('/login',function (req,res,next) {
-    let checkInfo = db.user.findOne({"username": req.query.user, "password": req.query.pass});
-    console.log(checkInfo,3);
-    if(req.query.user === '123' && req.query.pass === '123'){
+router.get('/login', async function (req,res,next) {
+    //console.log(BlogModel)
+    // var post = {            //新增数据必须定义数据model层定义数据结构(Schema)
+    //     username : 'aaa',
+    //     password: '111'
+    // }
+    // var blog = new BlogModel(post)
+    // await blog.save()
+    console.log(req.query)
+    const posts = await BlogModel.find({username: req.query.username, password: req.query.password});
+    console.log(posts);
+    return res.json(posts)
+    // let checkInfo = db.collection('user').findOne({"username": req.query.user, "password": req.query.pass});
+    // console.log(checkInfo,3);
+    // if(req.query.user === '123' && req.query.pass === '123'){n
         
-        res.cookie('token',token);
-        res.end();
-    } else {
-        res.send('用户名密码错误');
-    }
+    //     res.cookie('token',token);
+    //     res.end();
+    // } else {
+    //     res.send('用户名密码错误');
+    // }
 })
 router.get('/c',function (req,res,next) {
      console.log('未过期')
