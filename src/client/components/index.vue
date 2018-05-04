@@ -24,7 +24,7 @@ export default {
   },
   methods:{
       sub(){
-        this.$axios.get(api.login(), {'username':this.username, 'password': this.pass})
+        this.$axios.post(api.login(), {'username':this.username, 'password': this.pass})
         .then(function(res) {
            console.log(res);
         });
