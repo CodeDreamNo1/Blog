@@ -4,7 +4,10 @@ var BlogModel = require('../model/login')
 const jwt = require('jsonwebtoken');
 const tokenS = 'gys';
 // view engine setup
-router.all('/^(?!\/login).*$/',function (req, res, next) {
+console.log(router.all.toString());
+console.log(1);
+router.all('/^(?!\/login)/',function (req, res, next) {
+    console.log('访问其他路基')
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     jwt.verify(token, tokenS, function (err, decoded) {
         if (!err){
@@ -42,7 +45,7 @@ router.post('/login', async function(req, res, next) {
                 // }
             );
             res.cookie('token',token);
-            res.end();
+            res.redirect('#/list');
     } else {
         console.log('开')
         res.headers['COOKIE'] = null;

@@ -4,6 +4,7 @@
     <input type="text" v-model="username">
     <input type="text" v-model="pass">
     <button @click="sub">测试token</button>
+   <button @click="getdata">ss</button>
   </div>
 </template>
 
@@ -28,6 +29,11 @@ export default {
         .then(function(res) {
            console.log(res);
         });
+      },
+      getdata(){
+          this.$axios.get('/c').then(function(res){
+            console.log(res);
+          })
       }
   }
 }
