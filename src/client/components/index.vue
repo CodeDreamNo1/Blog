@@ -1,11 +1,5 @@
 <template>
-  <div>
-    <h1>{{ msg }}</h1>
-    <input type="text" v-model="username">
-    <input type="text" v-model="pass">
-    <button @click="sub">测试token</button>
-   <button @click="getdata">ss</button>
-  </div>
+
 </template>
 
 <script>
@@ -35,6 +29,6 @@ export default {
             console.log(res);
           })
       }
-  }
+  },
 }
 </script>

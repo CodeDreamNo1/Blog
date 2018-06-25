@@ -6,7 +6,7 @@ const tokenS = 'gys';
 // view engine setup
 
 router.all('/^(?!\/login)/',function (req, res, next) {
-    console.log('访问其他路基')
+
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
     jwt.verify(token, tokenS, function (err, decoded) {
         if (!err){
@@ -19,6 +19,7 @@ router.all('/^(?!\/login)/',function (req, res, next) {
 })
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    console.log(1);
     res.sendFile('../views/index.html');
 });
 router.post('/login', async function(req, res, next) {
