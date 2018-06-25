@@ -4,8 +4,7 @@ var BlogModel = require('../model/login')
 const jwt = require('jsonwebtoken');
 const tokenS = 'gys';
 // view engine setup
-console.log(router.all.toString());
-console.log(1);
+
 router.all('/^(?!\/login)/',function (req, res, next) {
     console.log('访问其他路基')
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
